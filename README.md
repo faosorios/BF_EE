@@ -11,6 +11,5 @@ Attached base packages: stats, graphics, grDevices, utils, datasets, methods, ba
 Other attached packages: alabama, gmm
 
 CONTENTS:
-- code/BF.simul.R: R functions to compute the empirical size test using Wald, Bilinear
-  Form, Lagrange Multiplier and Distance test statistics.
+- code/BF.simul.R: R functions to compute the empirical sizes using Wald, bilinear form, Lagrange multiplier and distance test statistics.
 - code/simulation.R: R commands to perform the simulation study described at Section 3 from manuscript.
