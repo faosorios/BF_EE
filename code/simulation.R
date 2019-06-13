@@ -1,5 +1,4 @@
-## These simulations were performed on an HP Proliant DL360 Server equipped with
-## with Intel Xeon E5-2630 processor at 2.4 GHz and 16 GB of RAM DDR4.
+## These simulations were performed on an HP Proliant DL360 Server equipped with Intel Xeon E5-2630 processor at 2.4 GHz and 16 GB of RAM DDR4.
 ## The total simulation time was 4 hours, 18 minutes, and 17 seconds.
 
 ## reading R sources
