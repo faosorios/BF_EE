@@ -1,7 +1,7 @@
-## Id: BF.simul.R, last updated 2019/06/13
+## Id: BF.simul.R, last updated 2019/10/03
 ## Author: originally coded by Federico Crudu, with contributions of Felipe Osorio
 
-simul.EE <- function(Nsize = 5000, nobs = 500, coef, sigma, alpha = 0.05)
+simul.EE <- function(Nsize = 5000, nobs = 500, coef, sigma, alpha = 0.05, trace = TRUE, msg = NULL)
 { ## function to perform the simulation experiment (Section 3 of the manuscript)
   constr.A <- function(coef) {
     coef[2] - 1.0 / coef[3]
@@ -45,11 +45,16 @@ simul.EE <- function(Nsize = 5000, nobs = 500, coef, sigma, alpha = 0.05)
     crossprod(colSums(g))
   }
 
-  ok <- matrix(FALSE, nrow = Nsize, ncol = 7) # results container
+  if (is.null(msg))
+    msg <- "Progress"
+
+  ok <- matrix(FALSE, nrow = Nsize, ncol = 6) # results container
   now <- proc.time()
 
-  cat("  Progress:\n")
-  pb <- txtProgressBar(min = 0, max = Nsize, style = 3)
+  if (trace) {
+    cat(" ", paste(msg, ":", sep = ""), "\n")
+    pb <- txtProgressBar(min = 0, max = Nsize, style = 3)
+  }
 
   # Monte Carlo iterations
   for (i in 1:Nsize) {
@@ -82,13 +87,12 @@ simul.EE <- function(Nsize = 5000, nobs = 500, coef, sigma, alpha = 0.05)
     J.tilde <- crossprod(colSums(g1), solve(crossprod(g1), colSums(g1)))
     DM <- J.tilde - J.hat
 
-    # Wald, BF and LM statistics (hypothesis A)
+    # Wald and BF statistics (hypothesis A)
     g1 <- moments(cf1)
     G1 <- moments.deriv(cf1)
     a1 <- constr.A(cf0)
     a1.dot <- deriv.A(cf0)
     Wald.A <- crossprod(a1, solve(crossprod(a1.dot, V0 %*% a1.dot), a1))
-    LM.A <- crossprod(colSums(g1), solve(crossprod(g1), colSums(g1)))
     BF.A <- crossprod(G1 %*% (cf1 - cf0), solve(crossprod(g1), colSums(g1)))
 
     # Wald, BF and LM statistics (hypothesis B)
@@ -97,8 +101,8 @@ simul.EE <- function(Nsize = 5000, nobs = 500, coef, sigma, alpha = 0.05)
     a2 <- constr.B(cf0)
     a2.dot <- deriv.B(cf0)
     Wald.B <- crossprod(a2, solve(crossprod(a2.dot, V0 %*% a2.dot), a2))
-    LM.B <- crossprod(colSums(g2), solve(crossprod(g2), colSums(g2)))
     BF.B <- crossprod(G2 %*% (cf2 - cf0), solve(crossprod(g2), colSums(g2)))
+    LM <- crossprod(colSums(g2), solve(crossprod(g2), colSums(g2)))
 
     # saving results
     df <- length(a1)
@@ -109,16 +113,17 @@ simul.EE <- function(Nsize = 5000, nobs = 500, coef, sigma, alpha = 0.05)
     ok[i,2] <- Wald.B > cutoff.B
     ok[i,3] <- BF.A > cutoff.A
     ok[i,4] <- BF.B > cutoff.B
-    ok[i,5] <- LM.A > cutoff.A
-    ok[i,6] <- LM.B > cutoff.B
-    ok[i,7] <- DM > cutoff.B
+    ok[i,5] <- LM > cutoff.B
+    ok[i,6] <- DM > cutoff.B
 
     # update progress bar
-    setTxtProgressBar(pb, i)
+    if (trace)
+      setTxtProgressBar(pb, i)
   }
-  close(pb)
+  if (trace)
+    close(pb)
 
-  tnames <- c("Wald.A","Wald.B","BF.A","BF.B","LM.A","LM.B","D")
+  tnames <- c("Wald.A","Wald.B","BF.A","BF.B","LM","D")
   percentage <- apply(ok, 2, sum) / Nsize
   names(percentage) <- tnames
   cutoff <- c(cutoff.A, cutoff.B)
@@ -128,17 +133,36 @@ simul.EE <- function(Nsize = 5000, nobs = 500, coef, sigma, alpha = 0.05)
   out
 }
 
-summary.EE <- function(Nsize = 5000, coef, sigma, alpha = 0.05) {
-  out <- matrix(0, nrow = 4, ncol = 7)
+summary.EE <- function(Nsize = 5000, coef, sigma, alpha = 0.05, trace = TRUE) {
+  out <- matrix(0, nrow = 4, ncol = 6)
   now <- proc.time()
 
-  out[1,] <- simul.EE(Nsize, nobs = 20,  coef, sigma, alpha)$percentage
-  out[2,] <- simul.EE(Nsize, nobs = 50,  coef, sigma, alpha)$percentage
-  out[3,] <- simul.EE(Nsize, nobs = 100, coef, sigma, alpha)$percentage
-  out[4,] <- simul.EE(Nsize, nobs = 500, coef, sigma, alpha)$percentage
+  out[1,] <- simul.EE(Nsize, nobs = 20,  coef, sigma, alpha, trace, msg = "Stage 1 of 4")$percentage
+  out[2,] <- simul.EE(Nsize, nobs = 50,  coef, sigma, alpha, trace, msg = "Stage 2 of 4")$percentage
+  out[3,] <- simul.EE(Nsize, nobs = 100, coef, sigma, alpha, trace, msg = "Stage 3 of 4")$percentage
+  out[4,] <- simul.EE(Nsize, nobs = 500, coef, sigma, alpha, trace, msg = "Stage 4 of 4")$percentage
 
   rownames(out) <- c("20","50","100","500")
-  colnames(out) <- c("Wald.A","Wald.B","BF.A","BF.B","LM.A","LM.B","D")
+  colnames(out) <- c("Wald.A","Wald.B","BF.A","BF.B","LM","D")
 
   list(output = out, speed = proc.time() - now)
+}
+
+summary.power <- function(Nsize = 1000, nobs = 20, coef, delta, sigma, alpha = 0.05) {
+  n <- length(delta)
+  out <- matrix(0, nrow = n, ncol = 6)
+  now <- proc.time()
+
+  cat("  Progress:\n")
+  pb <- txtProgressBar(min = 0, max = n, style = 3)
+  for (i in 1:n) {
+    coef.alt <- c(coef[1], coef[2], coef[3] / delta[i])
+    out[i,] <- simul.EE(Nsize, nobs, coef.alt, sigma, alpha, trace = FALSE, msg = NULL)$percentage
+    setTxtProgressBar(pb, i)
+  }
+  close(pb)
+
+  colnames(out) <- c("Wald.A","Wald.B","BF.A","BF.B","LM","D")
+
+  list(power = out, delta = delta, speed = proc.time() - now)
 }
