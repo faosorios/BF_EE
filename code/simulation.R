@@ -1,6 +1,6 @@
 ## These simulations were performed on an HP Proliant DL360 Server equipped 
 ## with Intel Xeon E5-2630 processor at 2.4 GHz and 16 GB of RAM DDR4.
-## The total simulation time was 4 hours, 18 minutes, and 17 seconds.
+## The total simulation time was 23 hours, 40 minutes, and 3 seconds.
 
 ## reading R sources
 source("BF.simul.R")
@@ -44,7 +44,18 @@ out2 <- summary.power(Nsize = 1000, nobs =  50, coef = c(1,10,0.1), delta = delt
 out3 <- summary.power(Nsize = 1000, nobs = 100, coef = c(1,10,0.1), delta = delta, sigma = 0.4, alpha = 0.05)
 
 ## Figure 1.a (1st panel)
-plot(delta, out1[,6], type = "l", lwd = 3, xlab = "delta", ylab = "Empirical power", ylim = c(0,100))
-lines(delta, out1[,4], lwd = 3, col = "red", lty = 2)
-lines(delta, out1[,3], lwd = 3, col = "blue", lty = 3)
+plot(delta, out1$power[,5], type = "l", lwd = 3, xlab = "delta", ylab = "Empirical power", ylim = c(0,100))
+lines(delta, out1$power[,3], lwd = 3, col = "red", lty = 2)
+lines(delta, out1$power[,4], lwd = 3, col = "blue", lty = 3)
 
+## Figure 1.b (2nd panel)
+plot(delta, out2$power[,5], type = "l", lwd = 3, xlab = "delta", ylab = "Empirical power", ylim = c(0,100))
+lines(delta, out2$power[,3], lwd = 3, col = "red", lty = 2)
+lines(delta, out2$power[,4], lwd = 3, col = "blue", lty = 3)
+
+## Figure 1.c (3rd panel)
+plot(delta, out3$power[,5], type = "l", lwd = 3, xlab = "delta", ylab = "Empirical power", ylim = c(0,100))
+lines(delta, out3$power[,3], lwd = 3, col = "red", lty = 2)
+lines(delta, out3$power[,4], lwd = 3, col = "blue", lty = 3)
+
+## and so on..
