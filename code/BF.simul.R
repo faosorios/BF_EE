@@ -1,4 +1,4 @@
-## Id: BF.simul.R, last updated 2019/10/03
+## Id: BF.simul.R, last updated Oct 3, 2019
 ## Author: originally coded by Federico Crudu, with contributions of Felipe Osorio
 
 simul.EE <- function(Nsize = 5000, nobs = 500, coef, sigma, alpha = 0.05, trace = TRUE, msg = NULL)
