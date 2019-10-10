@@ -10,7 +10,6 @@ library(alabama)
 library(gmm)
 
 ## creating Table 1... (it will take long time)
-
 out1 <- summary.EE(Nsize = 5000, coef = c(1,10,0.1), sigma = 0.4, alpha = 0.05, trace = FALSE)
 out2 <- summary.EE(Nsize = 5000, coef = c(1,5.,0.2), sigma = 0.4, alpha = 0.05, trace = FALSE)
 out3 <- summary.EE(Nsize = 5000, coef = c(1,2.,0.5), sigma = 0.4, alpha = 0.05, trace = FALSE)
@@ -37,3 +36,15 @@ print(table1 / 100, digits = 2)
 #50   0.095  0.108 0.062 0.062 0.070 0.070
 #100  0.074  0.080 0.066 0.066 0.067 0.067
 #500  0.055  0.055 0.056 0.056 0.060 0.061
+
+## First row of Figure 1
+delta <- seq(0, 2, length = 101)[-1]
+out1 <- summary.power(Nsize = 1000, nobs =  20, coef = c(1,10,0.1), delta = delta, sigma = 0.4, alpha = 0.05)
+out2 <- summary.power(Nsize = 1000, nobs =  50, coef = c(1,10,0.1), delta = delta, sigma = 0.4, alpha = 0.05)
+out3 <- summary.power(Nsize = 1000, nobs = 100, coef = c(1,10,0.1), delta = delta, sigma = 0.4, alpha = 0.05)
+
+## Figure 1.a (1st panel)
+plot(delta, out1[,6], type = "l", lwd = 3, xlab = "delta", ylab = "Empirical power", ylim = c(0,100))
+lines(delta, out1[,4], lwd = 3, col = "red", lty = 2)
+lines(delta, out1[,3], lwd = 3, col = "blue", lty = 3)
+
