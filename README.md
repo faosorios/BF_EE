@@ -1,6 +1,8 @@
-Supplementary material to "Bilinear form test statistics for extremum estimation" by Federico Crudu and Felipe Osorio
+Supplementary material to **Bilinear form test statistics for extremum estimation** by Federico Crudu and Felipe Osorio
 
 Code written by: Federico Crudu, with contributions of Felipe Osorio
+
+Correspondence author: 
 
 Code tested on:
 - R version 3.6.0, running Linux Ubuntu 18.04 (64 bits server)
@@ -14,3 +16,4 @@ Other attached packages: alabama_2015.3-1, gmm_1.6-2, numDeriv_2016.8-1.1, sandw
 CONTENTS:
 - code/BF.simul.R: R function to compute the empirical sizes using Wald, bilinear form, Lagrange multiplier and distance test statistics.
 - code/simulation.R: R commands to perform the simulation study described at Section 3 from manuscript.
+- BF-EE_supp.pdf: Supplementary material with additional simulation results.
