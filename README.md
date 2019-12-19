@@ -1,4 +1,4 @@
-Supplementary material to **Bilinear form test statistics for extremum estimation** by Federico Crudu and Felipe Osorio
+Supplementary material to **Bilinear form test statistics for extremum estimation** by Federico Crudu and Felipe Osorio (Economics Letters 187, 108885. doi: https://doi.org/10.1016/j.econlet.2019.108885)
 
 Code written by: Federico Crudu, with contributions of Felipe Osorio
 
