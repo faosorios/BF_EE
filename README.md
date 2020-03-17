@@ -1,6 +1,6 @@
 [![R](https://img.shields.io/badge/Made%20with-R%20under%20development-success)](https://cran.r-project.org/)
 [![alabama](https://img.shields.io/badge/alabama-2015.3--1-red)](https://cran.r-project.org/package=alabama)
-[![gmm](https://img.shields.io/badge/gmm-1.6--2-orange)](https://cran.r-project.org/package=gmm)
+[![gmm](https://img.shields.io/badge/gmm-1.6--2-red)](https://cran.r-project.org/package=gmm)
 [![numDeriv](https://img.shields.io/badge/numDeriv-2016.8--1.1-red)](https://cran.r-project.org/package=numDeriv)
 [![sandwich](https://img.shields.io/badge/sandwich-2.5--1-red)](https://cran.r-project.org/package=sandwich)
 [![DOI](https://img.shields.io/badge/DOI-10.1016/j.econlet.2019.108885-blue)](http://doi.org/10.1016/j.econlet.2019.108885)
