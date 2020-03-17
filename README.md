@@ -3,6 +3,7 @@
 [![gmm](https://img.shields.io/badge/gmm-1.6--2-red)](https://cran.r-project.org/package=gmm)
 [![numDeriv](https://img.shields.io/badge/numDeriv-2016.8--1.1-red)](https://cran.r-project.org/package=numDeriv)
 [![sandwich](https://img.shields.io/badge/sandwich-2.5--1-red)](https://cran.r-project.org/package=sandwich)
+[![arXiv](https://img.shields.io/badge/arXiv-1912.01410-success)](https://arxiv.org/abs/1912.01410)
 [![DOI](https://img.shields.io/badge/DOI-10.1016/j.econlet.2019.108885-blue)](http://doi.org/10.1016/j.econlet.2019.108885)
 
 Supplementary material to **Bilinear form test statistics for extremum estimation** by Federico Crudu and Felipe Osorio (Economics Letters 187, 108885. DOI: [10.1016/j.econlet.2019.108885](https://doi.org/10.1016/j.econlet.2019.108885))
