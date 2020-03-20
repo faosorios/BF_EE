@@ -1,3 +1,5 @@
+# Bilinear form test statistics for extremum estimation
+
 [![R](https://img.shields.io/badge/Made%20with-R%20under%20development-success)](https://cran.r-project.org/)
 [![alabama](https://img.shields.io/badge/alabama-2015.3--1-red)](https://cran.r-project.org/package=alabama)
 [![gmm](https://img.shields.io/badge/gmm-1.6--2-red)](https://cran.r-project.org/package=gmm)
