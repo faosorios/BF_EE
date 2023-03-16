@@ -74,7 +74,7 @@ simul.EE <- function(Nsize = 5000, nobs = 500, coef, sigma, alpha = 0.05, trace 
     res0 <-fm0$residuals
     V0 <- fm0$vcov
 
-    # fitting unconstrained models
+    # fitting constrained models
     fm1 <- auglag(par = coef.true, fn = c.objective, heq = constr.A, control.outer = list(trace = FALSE))
     cf1 <- fm1$par
     fm2 <- auglag(par = coef.true, fn = c.objective, heq = constr.B, control.outer = list(trace = FALSE))
