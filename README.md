@@ -12,8 +12,6 @@ Supplementary material to **Bilinear form test statistics for extremum estimatio
 
 Code written by: Federico Crudu, with contributions of Felipe Osorio
 
-Correspondence author: Felipe Osorio
-
 Code tested on:
 - R version 3.6.0, running Linux Ubuntu 18.04 (64 bits server)
 - R under development (2018-02-21 r74285), running Linux Mint 18.3 (64 bits)
